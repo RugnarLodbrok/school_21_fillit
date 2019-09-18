@@ -68,4 +68,5 @@ add_executable(a.out
         libft/ft_lstiter.c
         libft/ft_lstmap.c
 
-        libft/t_buff.c)
+        libft/t_buff.c
+        libft/ft_sqrt.c)

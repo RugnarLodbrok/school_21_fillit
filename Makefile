@@ -12,7 +12,7 @@
 
 CC = gcc
 NAME = fillit
-FLAGS = -Wall -Wextra -Werror
+FLAGS = #-Wall -Wextra -Werror
 SRC = src/main.c \
 	src/solver.c
 OPTION = -I. -Iheaders
