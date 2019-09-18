@@ -33,6 +33,12 @@ typedef struct		s_buff
 	size_t	size;
 }					t_buff;
 
+typedef struct		s_point
+{
+	int	x;
+	int	y;
+}					t_point;
+
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
