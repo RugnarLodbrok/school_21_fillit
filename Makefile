@@ -24,8 +24,8 @@ $(NAME) : libft/libft.a $(OBJ)
 	$(CC) $(FLAGS) $(OPTION) -o $(OBJ) -c $(SRC)
 	$(CC) -o $(NAME) $(OBJ) -I $(HEADER) -L libft/ -lft
 
-%.o: %.c libft
-	$(CC) $(FLAGS) -c $< $(OPTION)
+%.o: %.c libft/libft.a
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) $(OPTION)
 
 libft/libft.a :
 	make -C libft/
