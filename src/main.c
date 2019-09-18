@@ -7,12 +7,12 @@ void draw_solution(int size, t_point *solution);
 
 int main(void)
 {
-	int *tetaminos;
+	int *tetraminos;
 	t_point *solution;
 	int size;
 
-	CHECK0RET1(tetaminos = read_tetraminos("input.txt"));
-	solution = fill_it(tetaminos, &size);
+	CHECK0RET1(tetraminos = read_tetraminos("input.txt"));
+	solution = fill_it(tetraminos, &size);
 	draw_solution(size, solution);
 	return (0);
 }
