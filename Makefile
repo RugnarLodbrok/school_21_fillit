@@ -13,19 +13,19 @@
 CC = gcc
 NAME = fillit
 FLAGS = -Wall -Wextra -Werror
-HEADER = .
-SRC = src/main.c
-OPTION = -I $(HEADER)
+SRC = src/main.c \
+	src/solver.c
+OPTION = -I. -Iheaders
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : libft/libft.a $(OBJ)
-	$(CC) $(FLAGS) $(OPTION) -o $(OBJ) -c $(SRC)
-	$(CC) -o $(NAME) $(OBJ) -I $(HEADER) -L libft/ -lft
+	$(CC) -o $(NAME) $(OBJ) $(OPTION) -L libft/ -lft
 
 %.o: %.c libft/libft.a
-	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) $(OPTION)
+	@echo compile $(<) "->" $(<:.c=.o)
+	@$(CC) $(FLAGS) -c $(<) -o $(<:.c=.o) $(OPTION)
 
 libft/libft.a :
 	make -C libft/

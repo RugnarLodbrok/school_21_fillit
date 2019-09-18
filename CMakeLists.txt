@@ -3,7 +3,10 @@ project(libft_run C)
 set(CMAKE_C_STANDARD 90)
 include_directories(.)
 include_directories(headers)
-add_executable(a.out src/main.c
+add_executable(a.out
+        src/main.c
+        src/solver.c
+
         libft/ft_memset.c
         libft/ft_bzero.c
         libft/ft_memcpy.c
