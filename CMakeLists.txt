@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 project(libft_run C)
 set(CMAKE_C_STANDARD 90)
 include_directories(.)
+include_directories(headers)
 add_executable(a.out src/main.c
         libft/ft_memset.c
         libft/ft_bzero.c

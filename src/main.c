@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include "libft/libft.h"
-
-int *read_tetraminos(const char *f_name);
-t_point *fill_it(int *tetraminos, int *size_ptr);
-void draw_solution(int size, t_point *solution);
+#include "fillit.h"
 
 int main(void)
 {
@@ -12,7 +9,7 @@ int main(void)
 	int size;
 
 	CHECK0RET1(tetraminos = read_tetraminos("input.txt"));
-	solution = fill_it(tetraminos, &size);
+	solution = solve(tetraminos, &size);
 	draw_solution(size, solution);
 	return (0);
 }
