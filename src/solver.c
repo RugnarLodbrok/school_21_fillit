@@ -12,6 +12,14 @@
 
 #include "libft/libft.h"
 
+t_point *solve_for_size(int *tetraminos, int n, int size)
+{
+	t_point *ret;
+
+	CHECK0RET0(ret = malloc(sizeof(t_point) * (n + 1)))
+	return (ret);
+}
+
 t_point *solve(int *tetraminos, int *size_ptr)
 {
 	int n;
@@ -24,9 +32,4 @@ t_point *solve(int *tetraminos, int *size_ptr)
 	while (!(ret = solve_for_size(tetraminos, n, *size_ptr)))
 		(*size_ptr)++;
 	return ret;
-}
-
-solve_for_size(int *tetraminos, int n, int size)
-{
-	CHECK0RET0(ret = malloc(sizeof(t_point) * (n + 1)))
 }
