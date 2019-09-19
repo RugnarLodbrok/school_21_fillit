@@ -1,29 +1,24 @@
 #include <stdio.h>
 #include "libft/libft.h"
 #include "fillit.h"
+#include "tetra.h"
 
 int main(void)
 {
-	int *tetraminos;
+	t_tetra **tetraminos;
 	t_point *solution;
 	int size;
 
-//	CHECK0RET1(tetraminos = read_tetraminos("input.txt"));
+	CHECK0RET1(tetraminos = read_tetraminos("input.txt"));
+
+	while (*tetraminos)
+	{
+		tetra_draw(*tetraminos++);
+		ft_putchar('\n');
+	}
 //	solution = solve(tetraminos, &size);
 //	draw_solution(size, solution);
-	printf("%d\n", ft_sqrt_ceil(25));
-	printf("%d\n", ft_sqrt_ceil(26));
-	printf("%d\n", ft_sqrt_ceil(27));
-	printf("%d\n", ft_sqrt_ceil(28));
-	printf("%d\n", ft_sqrt_ceil(29));
-	printf("%d\n", ft_sqrt_ceil(30));
-	printf("%d\n", ft_sqrt_ceil(31));
-	printf("%d\n", ft_sqrt_ceil(32));
-	printf("%d\n", ft_sqrt_ceil(33));
-	printf("%d\n", ft_sqrt_ceil(34));
-	printf("%d\n", ft_sqrt_ceil(35));
-	printf("%d\n", ft_sqrt_ceil(36));
-	printf("%d\n", ft_sqrt_ceil(37));
+
 	return (0);
 }
 

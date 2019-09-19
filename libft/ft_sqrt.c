@@ -30,7 +30,7 @@ int ft_sqrt_int(int nb)
 	return (avg);
 }
 
-int ceil_div(a, b)
+int ceil_div(int a, int b)
 {
 	return (a + b - 1) / b;
 }

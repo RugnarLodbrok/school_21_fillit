@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static int	isspace(char c)
+static int	is_sp(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n');
 }
@@ -23,11 +23,11 @@ char		*ft_strtrim(char const *s)
 	unsigned int	i;
 	char			*dst;
 
-	while (isspace(*s))
+	while (is_sp(*s))
 		s++;
 	i = ft_strlen(s);
 	if (i)
-		while (isspace(*(s + i - 1)))
+		while (is_sp(*(s + i - 1)))
 			i--;
 	if (!(dst = malloc(sizeof(char) * (i + 1))))
 		return (0);

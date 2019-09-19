@@ -13,7 +13,9 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-int *read_tetraminos(const char *f_name);
+#include "tetra.h"
+
+t_tetra **read_tetraminos(const char *f_name);
 t_point *solve(int *tetraminos, int *size_ptr);
 void draw_solution(int size, t_point *solution);
 

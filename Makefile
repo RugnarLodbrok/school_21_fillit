@@ -14,7 +14,9 @@ CC = gcc
 NAME = fillit
 FLAGS = #-Wall -Wextra -Werror
 SRC = src/main.c \
-	src/solver.c
+	src/tetra.c \
+	src/solver.c \
+	src/reader.c
 OPTION = -I. -Iheaders
 OBJ = $(SRC:.c=.o)
 

@@ -6,6 +6,8 @@ include_directories(headers)
 add_executable(a.out
         src/main.c
         src/solver.c
+        src/tetra.c
+        src/reader.c
 
         libft/ft_memset.c
         libft/ft_bzero.c
@@ -67,6 +69,8 @@ add_executable(a.out
         libft/ft_lstaddend.c
         libft/ft_lstiter.c
         libft/ft_lstmap.c
+
+        libft/ft_swap.c
 
         libft/t_buff.c
         libft/ft_sqrt.c)
