@@ -29,14 +29,16 @@ int solve_for_size(t_tetra **tetras, int n, int size)
 	return (1);
 }
 
-void solve(t_tetra **tetras, int *size_ptr)
+int solve(t_tetra **tetras)
 {
 	int n;
+	int size;
 
 	n = 0;
 	while (tetras[n])
 		n++;
-	*size_ptr = ft_sqrt_ceil(n * 4);
-	while (!solve_for_size(tetras, n, *size_ptr))
-		(*size_ptr)++;
+	size = ft_sqrt_ceil(n * 4);
+	while (!solve_for_size(tetras, n, size))
+		size++;
+	return (size);
 }
