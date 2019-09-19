@@ -47,6 +47,7 @@ void				*ft_memmove(void *dst, const void *src, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
+size_t				ft_len(void **s);
 char				*ft_strdup(const char *s);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t n);
@@ -107,5 +108,8 @@ int					t_buff_add_len(t_buff *b, size_t len);
 
 int					ft_sqrt_int(int nb);
 int					ft_sqrt_ceil(int nb);
+void				ft_swap(void **a, void **b);
+void				ft_swap_int(int *a, int *b);
+void				ft_swap_char(char *a, char *b);
 
 #endif

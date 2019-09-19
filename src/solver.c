@@ -12,8 +12,31 @@
 
 #include "libft/libft.h"
 #include "tetra.h"
+#include "plane_iter.h"
 
 int solve_for_size(t_tetra **tetras, int n, int size)
+{
+	char field[256][256];
+	int i;
+	t_point *ij;
+
+	i = 0;
+	while (i < size)
+		ft_memset(field[i++], T_EMPTY, size);
+	ij = plane_iter_tab(size * size);
+	while (*tetras)
+	{
+		i = 0;
+		while (!tetra_put(*tetras, field, ij[i], size))
+			if (i++ > size * size - 1)
+				return (0);
+		tetra_draw(*tetras, field);
+		tetras++;
+	}
+	return (1);
+}
+
+int solve_for_size_mock(t_tetra **tetras, int n, int size)
 {
 	int i;
 
@@ -34,9 +57,7 @@ int solve(t_tetra **tetras)
 	int n;
 	int size;
 
-	n = 0;
-	while (tetras[n])
-		n++;
+	n = ft_len((void *) tetras);
 	size = ft_sqrt_ceil(n * 4);
 	while (!solve_for_size(tetras, n, size))
 		size++;

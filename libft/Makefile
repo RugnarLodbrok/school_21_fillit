@@ -74,6 +74,7 @@ SRC = ft_memset.c \
       ft_lstiter.c \
       ft_lstmap.c \
       ft_sqrt.c \
+      ft_swap.c \
       t_buff.c
 OBJ = $(SRC:.c=.o)
 

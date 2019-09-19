@@ -21,3 +21,13 @@ size_t	ft_strlen(const char *s)
 		n++;
 	return (n);
 }
+
+size_t	ft_len(void **s)
+{
+	int n;
+
+	n = 0;
+	while (*s++)
+		n++;
+	return (n);
+}

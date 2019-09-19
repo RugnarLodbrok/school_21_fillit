@@ -9,6 +9,7 @@ add_executable(a.out
         src/tetra.c
         src/reader.c
         src/draw.c
+        src/plane_iter.c
 
         libft/ft_memset.c
         libft/ft_bzero.c

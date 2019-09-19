@@ -1,5 +1,6 @@
 #include "libft/libft.h"
 #include "tetra.h"
+#include "plane_iter.h"
 
 t_tetra *tetra_init(t_tetra *t, char **data)
 {
@@ -33,11 +34,50 @@ int tetra_intersects(t_tetra *t, int i, int j)
 	return (t->data[ii][jj] == T_FULL);
 }
 
-void tetra_draw(t_tetra *t)
+int tetra_put(t_tetra *t, char field[256][256], t_point pos, int size)
 {
-	char **d;
+	int i;
+	int k;
+	t_point p;
+	t_point *pts;
 
-	d = t->data;
-	while (*d)
-		ft_putendl(*d++);
+	pts = plane_iter_tab(16);
+	i = -1;
+	k = 0;
+	while (++i < 16)
+	{
+		if (t->data[pts[i].x][pts[i].y] != T_FULL)
+			continue;
+		k++;
+		p.x = pts[i].x + pos.x;
+		p.y = pts[i].y + pos.y;
+		if (p.x < 0 || p.x > size - 1 || p.y < 0 || p.y > size - 1)
+			return (0);
+		if (field[p.x][p.y] != T_EMPTY)
+			return (0);
+		if (k >= 4)
+			break;
+	}
+	t->pos = pos;
+	return (1);
+}
+
+void tetra_draw(t_tetra *t, char field[256][256])
+{
+	t_point *pts;
+	int i;
+	int k;
+
+	pts = plane_iter_tab(16);
+	i = -1;
+	k = 0;
+	while (++i < 16)
+	{
+		if (t->data[pts[i].x][pts[i].y] != T_FULL)
+			continue;
+		field[pts[i].x + t->pos.x][pts[i].y + t->pos.y] = t->letter;
+		k++;
+		if (k >= 4)
+			break ;
+	}
 }
