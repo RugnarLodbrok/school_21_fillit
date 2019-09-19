@@ -8,6 +8,7 @@ add_executable(a.out
         src/solver.c
         src/tetra.c
         src/reader.c
+        src/draw.c
 
         libft/ft_memset.c
         libft/ft_bzero.c

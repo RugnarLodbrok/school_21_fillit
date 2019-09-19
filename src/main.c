@@ -5,19 +5,23 @@
 
 int main(void)
 {
-	t_tetra **tetraminos;
-	t_point *solution;
+	int i;
+	t_tetra **tetras;
 	int size;
 
-	CHECK0RET1(tetraminos = read_tetraminos("input.txt"));
+	CHECK0RET1(tetras = read_tetraminos("input.txt"));
 
-	while (*tetraminos)
+	i = 0;
+	printf("solve...\n");
+	solve(tetras, &size);
+	while (tetras[i])
 	{
-		tetra_draw(*tetraminos++);
+		tetra_draw(tetras[i]);
+		printf("solution: %d %d\n", tetras[i]->pos.x, tetras[i]->pos.y);
 		ft_putchar('\n');
+		i++;
 	}
-//	solution = solve(tetraminos, &size);
-//	draw_solution(size, solution);
+	draw_solution(size, tetras);
 
 	return (0);
 }

@@ -15,6 +15,7 @@ NAME = fillit
 FLAGS = #-Wall -Wextra -Werror
 SRC = src/main.c \
 	src/tetra.c \
+	src/draw.c \
 	src/solver.c \
 	src/reader.c
 OPTION = -I. -Iheaders

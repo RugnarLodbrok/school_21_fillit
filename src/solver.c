@@ -11,25 +11,32 @@
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include "tetra.h"
 
-t_point *solve_for_size(int *tetraminos, int n, int size)
+int solve_for_size(t_tetra **tetras, int n, int size)
 {
-	t_point *ret;
+	int i;
 
-	CHECK0RET0(ret = malloc(sizeof(t_point) * (n + 1)))
-	return (ret);
+	if (size < 4 * n)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		tetras[i]->pos.x = 4 * i;
+		tetras[i]->pos.y = 4 * i;
+		i++;
+	}
+	return (1);
 }
 
-t_point *solve(int *tetraminos, int *size_ptr)
+void solve(t_tetra **tetras, int *size_ptr)
 {
 	int n;
-	t_point *ret;
 
 	n = 0;
-	while (tetraminos[n])
+	while (tetras[n])
 		n++;
-	(*size_ptr) = ft_sqrt_ceil(n * 4);
-	while (!(ret = solve_for_size(tetraminos, n, *size_ptr)))
+	*size_ptr = ft_sqrt_ceil(n * 4);
+	while (!solve_for_size(tetras, n, *size_ptr))
 		(*size_ptr)++;
-	return ret;
 }

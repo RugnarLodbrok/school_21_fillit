@@ -16,7 +16,7 @@
 #include "tetra.h"
 
 t_tetra **read_tetraminos(const char *f_name);
-t_point *solve(int *tetraminos, int *size_ptr);
-void draw_solution(int size, t_point *solution);
+void solve(t_tetra **tetras, int *size_ptr);
+void draw_solution(int size, t_tetra **tetras);
 
 #endif
