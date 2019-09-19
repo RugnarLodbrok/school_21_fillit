@@ -30,6 +30,7 @@ void draw_solution(const int size, t_tetra **tetras)
 			res[i][j] = get_letter(i, j, tetras);
 			j++;
 		}
+		res[i][size] = 0;
 		i++;
 	}
 	i = 0;
