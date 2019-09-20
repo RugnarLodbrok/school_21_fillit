@@ -16,7 +16,7 @@
 
 int solve_for_size(t_tetra **tetras, int n, int size)
 {
-	char field[256][256];
+	char field[FIELD_SIZE][FIELD_SIZE];
 	int i;
 	t_point *ij;
 
