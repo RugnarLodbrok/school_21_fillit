@@ -10,6 +10,7 @@ t_tetra *tetra_init(t_tetra *t, char **data)
 	t->letter = letter++;
 	t->pos.x = 0;
 	t->pos.y = 0;
+	t->data_idx_iter = plane_iter_tab(16);
 	return (t);
 }
 
@@ -28,18 +29,16 @@ int	tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 	int i;
 	int k;
 	t_point p;
-	t_point *pts;
 
-	pts = plane_iter_tab(16);
 	i = -1;
 	k = 0;
 	while (++i < 16)
 	{
-		if (t->data[pts[i].x][pts[i].y] != T_FULL)
+		if (t->data[t->data_idx_iter[i].x][t->data_idx_iter[i].y] != T_FULL)
 			continue;
 		k++;
-		p.x = pts[i].x + pos.x;
-		p.y = pts[i].y + pos.y;
+		p.x = t->data_idx_iter[i].x + pos.x;
+		p.y = t->data_idx_iter[i].y + pos.y;
 		if (p.x < 0 || p.x > size - 1 || p.y < 0 || p.y > size - 1)
 			return (0);
 		if (field[p.x][p.y] != T_EMPTY)
@@ -53,18 +52,20 @@ int	tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 
 void tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE])
 {
-	t_point *pts;
 	int i;
 	int k;
+	int x;
+	int y;
 
-	pts = plane_iter_tab(16);
 	i = -1;
 	k = 0;
 	while (++i < 16)
 	{
-		if (t->data[pts[i].x][pts[i].y] != T_FULL)
+		x = t->data_idx_iter[i].x;
+		y = t->data_idx_iter[i].y;
+		if (t->data[x][y] != T_FULL)
 			continue;
-		field[pts[i].x + t->pos.x][pts[i].y + t->pos.y] = t->letter;
+		field[x + t->pos.x][y + t->pos.y] = t->letter;
 		k++;
 		if (k >= 4)
 			break ;

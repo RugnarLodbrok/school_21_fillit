@@ -10,6 +10,7 @@ typedef struct s_tetra
 	char	letter;
 	char	**data;
 	t_point	pos;
+	t_point	*data_idx_iter;
 } t_tetra;
 
 t_tetra	*tetra_init(t_tetra *t, char **data);
