@@ -4,12 +4,12 @@
 #include "tetra.h"
 #include "plane_iter.h"
 
-int main(void)
+int main(int argc, const char **argv)
 {
 	t_tetra **tetras;
 	int size;
 
-	CHECK0RET1(tetras = read_tetraminos("input.txt"));
+	CHECK0RET1(tetras = read_tetraminos(argv[1]));
 	size = solve(tetras);
 	draw_solution(size, tetras);
 	return (0);
