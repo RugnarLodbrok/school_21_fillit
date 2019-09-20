@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reader.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edrowzee <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/20 16:45:31 by edrowzee          #+#    #+#             */
+/*   Updated: 2019/09/20 16:45:33 by edrowzee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "libft/libft.h"
 #include "headers/tetra.h"
 #include "headers/fillit.h"
 
-void	ft_data_free(char **data)
+void		ft_data_free(char **data)
 {
 	int i;
 
@@ -16,7 +28,7 @@ void	ft_data_free(char **data)
 	free(data);
 }
 
-int		ft_connects_counter(char **data, int row, int col)
+int			ft_connects_counter(char **data, int row, int col)
 {
 	int result;
 
@@ -44,7 +56,7 @@ int		ft_connects_counter(char **data, int row, int col)
 	return (result);
 }
 
-int		ft_validate_tetr(char **data)
+int			ft_val_tet(char **data)
 {
 	int		connects;
 
@@ -58,12 +70,10 @@ int		ft_validate_tetr(char **data)
 	}
 }
 
-int		ft_validate_lines(char **data)
+int			ft_val_ln(char **data, int row, int col)
 {
 	int	num_of_pieces;
 	int	total_str_len;
-	int	row;
-	int	col;
 
 	num_of_pieces = 0;
 	total_str_len = 0;
@@ -71,7 +81,7 @@ int		ft_validate_lines(char **data)
 	while (row < 4)
 	{
 		col = 0;
-		while(data[row][col] != '\0')
+		while (data[row][col] != '\0')
 		{
 			if (data[row][col] == '#')
 				num_of_pieces++;
@@ -80,14 +90,6 @@ int		ft_validate_lines(char **data)
 		}
 		row++;
 	}
-//	printf("%s\n", data[0]);
-//	printf("%s\n", data[1]);
-//	printf("%s\n", data[2]);
-//	printf("%s\n", data[3]);
-//	printf("%s\n", "end");
-	printf("%d\n", num_of_pieces);
-	printf("%d\n", total_str_len);
-//	printf("data[4][0] is: %c\n", data[4][0]);
 	if (num_of_pieces != 4 || total_str_len != 16)
 	{
 		ft_data_free(data);
@@ -96,34 +98,31 @@ int		ft_validate_lines(char **data)
 	return (1);
 }
 
-
-t_tetra **read_tetraminos(const char *f_name)
+t_tetra		**read_tetraminos(const char *f_name, int row_num, int tetr_num)
 {
 	t_tetra		**ret;
-	char 		**data;
-	int			row_num;
-	int			tetr_num;
+	char		**data;
 	int			fd;
 
-	tetr_num = 0;
 	fd = open(f_name, O_RDONLY);
 	ret = malloc(sizeof(t_tetra) * 27);
-	while (tetr_num < 3)
+	data = malloc(sizeof(char *) * 5);
+	while (get_next_line(fd, data + row_num) != 0)
 	{
-		row_num = 0;
-		data = malloc(sizeof(char *) * 5);
-		while (row_num < 5)
+		if (row_num == 4)
 		{
-			get_next_line(fd, data + row_num);
-			row_num++;
+			if (((ft_val_ln(data, 0, 0)) == -1) || ((ft_val_tet(data)) == -1))
+				return (NULL);
+			else
+				ret[tetr_num] = tetra_new(data);
+			data = malloc(sizeof(char *) * 5);
+			row_num = 0;
+			tetr_num++;
 		}
-		if (((ft_validate_lines(data)) == -1) || ((ft_validate_tetr(data)) == -1))
-			return (NULL);
 		else
-		{
-			ret[tetr_num] = tetra_new(data);
-		}
-		tetr_num++;
+			row_num++;
 	}
+	if (row_num != 0)
+		return (NULL);
 	return (ret);
 }
