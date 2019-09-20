@@ -50,7 +50,7 @@ int	tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 	return (1);
 }
 
-void tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE])
+void tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE], char c)
 {
 	int i;
 	int k;
@@ -65,9 +65,14 @@ void tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE])
 		y = t->data_idx_iter[i].y;
 		if (t->data[x][y] != T_FULL)
 			continue;
-		field[x + t->pos.x][y + t->pos.y] = t->letter;
+		field[x + t->pos.x][y + t->pos.y] = c;
 		k++;
 		if (k >= 4)
 			break ;
 	}
+}
+
+void tetra_draw_letter(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE])
+{
+	tetra_draw(t, field, t->letter);
 }

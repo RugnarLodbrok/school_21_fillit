@@ -15,7 +15,7 @@ void draw_solution(const int size, t_tetra **tetras)
 		res[i++][size] = 0;
 	}
 	while (*tetras)
-		tetra_draw(*tetras++, res);
+		tetra_draw_letter(*tetras++, res);
 	i = 0;
 	while (i < size)
 		ft_putendl(res[i++]);

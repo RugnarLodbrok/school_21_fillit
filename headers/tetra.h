@@ -17,6 +17,7 @@ t_tetra	*tetra_init(t_tetra *t, char **data);
 t_tetra	*tetra_new(char **data);
 int		tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 		t_point pos, int size);
-void	tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE]);
+void	tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE], char c);
+void	tetra_draw_letter(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE]);
 
 #endif
