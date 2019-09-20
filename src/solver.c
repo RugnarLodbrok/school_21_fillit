@@ -15,14 +15,14 @@
 #include "plane_iter.h"
 
 int solve_recur(char field[FIELD_SIZE][FIELD_SIZE],
-				t_tetra **tetras, int n, int size)
+				t_tetra **tetras, int size, t_point *xy)
 {
 	int i;
 	int j;
-	t_point *xy;
+	int n;
 
 	i = 0;
-	xy = plane_iter_tab(size * size);
+	n = ft_len((void **) tetras);
 	while (i < n)
 	{
 		ft_swap((void **) tetras, (void **) (tetras + i++));
@@ -34,7 +34,7 @@ int solve_recur(char field[FIELD_SIZE][FIELD_SIZE],
 			tetra_draw_letter(*tetras, field);
 			if (n == 1)
 				return (1);
-			if (solve_recur(field, tetras + 1, n - 1, size))
+			if (solve_recur(field, tetras + 1, size, xy))
 				return (1);
 			tetra_draw(*tetras, field, T_EMPTY);
 		}
@@ -46,14 +46,14 @@ int solve_for_size(t_tetra **tetras, int n, int size)
 {
 	char field[FIELD_SIZE][FIELD_SIZE];
 	int i;
-	t_point *ij;
+	t_point *xy;
 
 	i = 0;
 	while (i < size)
 		ft_memset(field[i++], T_EMPTY, size);
-//	ij = plane_iter_tab(size * size);
+	xy = plane_iter_tab(size * size);
 
-	return (solve_recur(field, tetras, n, size));
+	return (solve_recur(field, tetras, size, xy));
 }
 
 int solve(t_tetra **tetras)
