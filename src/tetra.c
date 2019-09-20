@@ -1,6 +1,7 @@
 #include "libft/libft.h"
 #include "tetra.h"
 #include "plane_iter.h"
+#include <stdio.h>
 
 t_tetra *tetra_init(t_tetra *t, char **data)
 {

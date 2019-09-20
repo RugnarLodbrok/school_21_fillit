@@ -6,7 +6,7 @@
 /*   By: ksticks <ksticks@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 15:04:22 by ksticks           #+#    #+#             */
-/*   Updated: 2019/09/20 14:30:45 by edrowzee         ###   ########.fr       */
+/*   Updated: 2019/09/20 14:46:40 by edrowzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 # include <stdlib.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 # define CHECK0RET(x, r) if (!(x)) return (r);
 # define CHECK0RET0(x) CHECK0RET(x, 0);
 # define CHECK0RET1(x) CHECK0RET(x, -1);
-# define BUFF_SIZE 42;
+# define BUFF_SIZE 42
 # define MALLCHECK(x) if (x == NULL) return (-1)
 # define MALLCKECK_INT(x) if (x == -1) return (-1)
 

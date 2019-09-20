@@ -16,7 +16,7 @@ void	ft_data_free(char **data)
 	free(data);
 }
 
-int ft_connects_counter(char **data, int row, int col)
+int		ft_connects_counter(char **data, int row, int col)
 {
 	int result;
 
@@ -35,7 +35,7 @@ int ft_connects_counter(char **data, int row, int col)
 				if (col > 0 && data[row][col - 1] == '#')
 					result++;
 				if (col < 3 && data[row][col + 1] == '#')
-						result++;
+					result++;
 			}
 			col++;
 		}
@@ -63,7 +63,7 @@ int		ft_validate_lines(char **data)
 	int	num_of_pieces;
 	int	total_str_len;
 	int	row;
-	int col;
+	int	col;
 
 	num_of_pieces = 0;
 	total_str_len = 0;
@@ -80,7 +80,15 @@ int		ft_validate_lines(char **data)
 		}
 		row++;
 	}
-	if (data[4][0] != '\n' || num_of_pieces != 4 || total_str_len != 16)
+//	printf("%s\n", data[0]);
+//	printf("%s\n", data[1]);
+//	printf("%s\n", data[2]);
+//	printf("%s\n", data[3]);
+//	printf("%s\n", "end");
+	printf("%d\n", num_of_pieces);
+	printf("%d\n", total_str_len);
+//	printf("data[4][0] is: %c\n", data[4][0]);
+	if (num_of_pieces != 4 || total_str_len != 16)
 	{
 		ft_data_free(data);
 		return (-1);
@@ -91,7 +99,7 @@ int		ft_validate_lines(char **data)
 
 t_tetra **read_tetraminos(const char *f_name)
 {
-	t_tetra	*ret[27];
+	t_tetra		**ret;
 	char 		**data;
 	int			row_num;
 	int			tetr_num;
@@ -99,7 +107,8 @@ t_tetra **read_tetraminos(const char *f_name)
 
 	tetr_num = 0;
 	fd = open(f_name, O_RDONLY);
-	while (fd != 0)
+	ret = malloc(sizeof(t_tetra) * 27);
+	while (tetr_num < 3)
 	{
 		row_num = 0;
 		data = malloc(sizeof(char *) * 5);
@@ -111,7 +120,10 @@ t_tetra **read_tetraminos(const char *f_name)
 		if (((ft_validate_lines(data)) == -1) || ((ft_validate_tetr(data)) == -1))
 			return (NULL);
 		else
+		{
 			ret[tetr_num] = tetra_new(data);
+		}
+		tetr_num++;
 	}
 	return (ret);
 }
