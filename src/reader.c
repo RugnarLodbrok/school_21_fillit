@@ -3,7 +3,7 @@
 #include "headers/tetra.h"
 #include "headers/fillit.h"
 
-void	ft_lines_free(char **data)
+void	ft_data_free(char **data)
 {
 	int i;
 
@@ -16,18 +16,46 @@ void	ft_lines_free(char **data)
 	free(data);
 }
 
-int		ft_validate_tetr(char **data)
+int ft_connects_counter(char **data, int row, int col)
 {
-	int row;
-	int col;
+	int result;
 
-	row = 0;
+	result = 0;
 	while (row < 4)
 	{
-
+		col = 0;
+		while (col < 4)
+		{
+			if (data[row][col] == '#')
+			{
+				if (row > 0 && data[row - 1][col] == '#')
+					result++;
+				if (row < 3 && data[row + 1][col] == '#')
+					result++;
+				if (col > 0 && data[row][col - 1] == '#')
+					result++;
+				if (col < 3 && data[row][col + 1] == '#')
+						result++;
+			}
+			col++;
+		}
 		row++;
 	}
-	return (1);
+	return (result);
+}
+
+int		ft_validate_tetr(char **data)
+{
+	int		connects;
+
+	connects = ft_connects_counter(data, 0, 0);
+	if (connects == 6 || connects == 8)
+		return (1);
+	else
+	{
+		ft_data_free(data);
+		return (-1);
+	}
 }
 
 int		ft_validate_lines(char **data)
@@ -54,7 +82,7 @@ int		ft_validate_lines(char **data)
 	}
 	if (data[4][0] != '\n' || num_of_pieces != 4 || total_str_len != 16)
 	{
-		ft_lines_free(data);
+		ft_data_free(data);
 		return (-1);
 	}
 	return (1);
