@@ -6,7 +6,7 @@
 #    By: ksticks <ksticks@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 20:27:05 by ksticks           #+#    #+#              #
-#    Updated: 2019/09/12 17:08:47 by ksticks          ###   ########.fr        #
+#    Updated: 2019/09/20 14:35:50 by edrowzee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,9 @@ SRC = ft_memset.c \
       ft_lstmap.c \
       ft_sqrt.c \
       ft_swap.c \
-      t_buff.c
+      t_buff.c \
+      get_next_line.c
+
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)

@@ -6,7 +6,7 @@
 /*   By: ksticks <ksticks@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 15:04:22 by ksticks           #+#    #+#             */
-/*   Updated: 2019/09/17 19:28:27 by ksticks          ###   ########.fr       */
+/*   Updated: 2019/09/20 14:30:45 by edrowzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <fcntl.h>
 
 # define CHECK0RET(x, r) if (!(x)) return (r);
 # define CHECK0RET0(x) CHECK0RET(x, 0);
 # define CHECK0RET1(x) CHECK0RET(x, -1);
+# define BUFF_SIZE 42;
+# define MALLCHECK(x) if (x == NULL) return (-1)
+# define MALLCKECK_INT(x) if (x == -1) return (-1)
 
 typedef struct		s_list
 {
@@ -111,5 +115,7 @@ int					ft_sqrt_ceil(int nb);
 void				ft_swap(void **a, void **b);
 void				ft_swap_int(int *a, int *b);
 void				ft_swap_char(char *a, char *b);
+
+int					get_next_line(const int fd, char **line);
 
 #endif
