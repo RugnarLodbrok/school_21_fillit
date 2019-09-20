@@ -13,7 +13,6 @@
 #include "libft/libft.h"
 #include "tetra.h"
 #include "plane_iter.h"
-#include "fillit.h"
 
 int solve_recur(char field[FIELD_SIZE][FIELD_SIZE],
 				t_tetra **tetras, int n, int size)
@@ -55,44 +54,6 @@ int solve_for_size(t_tetra **tetras, int n, int size)
 //	ij = plane_iter_tab(size * size);
 
 	return (solve_recur(field, tetras, n, size));
-}
-
-int solve_for_size_naive(t_tetra **tetras, int n, int size)
-{
-	char field[FIELD_SIZE][FIELD_SIZE];
-	int i;
-	t_point *ij;
-
-	i = 0;
-	while (i < size)
-		ft_memset(field[i++], T_EMPTY, size);
-	ij = plane_iter_tab(size * size);
-	while (*tetras)
-	{
-		i = 0;
-		while (!tetra_put(*tetras, field, ij[i], size))
-			if (i++ > size * size - 1)
-				return (0);
-		tetra_draw_letter(*tetras, field);
-		tetras++;
-	}
-	return (1);
-}
-
-int solve_for_size_mock(t_tetra **tetras, int n, int size)
-{
-	int i;
-
-	if (size < 4 * n)
-		return (0);
-	i = 0;
-	while (i < n)
-	{
-		tetras[i]->pos.x = 4 * i;
-		tetras[i]->pos.y = 4 * i;
-		i++;
-	}
-	return (1);
 }
 
 int solve(t_tetra **tetras)
