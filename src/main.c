@@ -11,21 +11,6 @@ int main(int argc, const char **argv)
 
 	CHECK0RET1(tetras = read_tetraminos(argv[1], 0, 0));
 	size = solve(tetras);
-	/*printf("%s\n", tetras[0]->data[0]);
-	printf("%s\n", tetras[0]->data[1]);
-	printf("%s\n", tetras[0]->data[2]);
-	printf("%s\n", tetras[0]->data[3]);
-	printf("%s\n", "End tetr");
-	printf("%s\n", tetras[1]->data[0]);
-	printf("%s\n", tetras[1]->data[1]);
-	printf("%s\n", tetras[1]->data[2]);
-	printf("%s\n", tetras[1]->data[3]);
-	printf("%s\n", "End tetr");
-	printf("%s\n", tetras[2]->data[0]);
-	printf("%s\n", tetras[2]->data[1]);
-	printf("%s\n", tetras[2]->data[2]);
-	printf("%s\n", tetras[2]->data[3]);
-	printf("%s\n", "Solution is: ");*/
 	draw_solution(size, tetras);
 	return (0);
 }
