@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane_iter.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edrowzee <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/23 15:12:08 by edrowzee          #+#    #+#             */
+/*   Updated: 2019/09/23 15:12:37 by edrowzee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "plane_iter.h"
 
@@ -49,9 +61,9 @@ t_point plane_iter_next(t_plane_iter *self)
 
 t_point *plane_iter_tab(size_t n)
 {
-	size_t i;
-	t_point *ret;
-	t_plane_iter it;
+	size_t			i;
+	t_point			*ret;
+	t_plane_iter	it;
 
 	CHECK0RET0(ret = malloc(sizeof(t_point) * n));
 	i = 0;

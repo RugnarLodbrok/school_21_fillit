@@ -6,7 +6,7 @@
 /*   By: edrowzee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 16:45:31 by edrowzee          #+#    #+#             */
-/*   Updated: 2019/09/20 16:48:00 by edrowzee         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:14:40 by edrowzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include "../libft/libft.h"
 #include "headers/tetra.h"
 #include "../headers/fillit.h"
-
-void		ft_data_free(char **data)
-{
-	int i;
-
-	i = 0;
-	while (i < 5)
-	{
-		free(data[i]);
-		i++;
-	}
-	free(data);
-}
 
 int			ft_connects_counter(char **data, int row, int col)
 {
@@ -56,7 +43,7 @@ int			ft_connects_counter(char **data, int row, int col)
 	return (result);
 }
 
-int			ft_val_tet(char **data)
+int			ft_validate_tetriminos(char **data)
 {
 	int		connects;
 
@@ -65,19 +52,18 @@ int			ft_val_tet(char **data)
 		return (1);
 	else
 	{
-		ft_data_free(data);
-		return (-1);
+		write(1, "error\n", 6);
+		exit(1);
 	}
 }
 
-int			ft_val_ln(char **data, int row, int col)
+int			ft_validate_lines(char **data, int row, int col)
 {
 	int	num_of_pieces;
 	int	total_str_len;
 
 	num_of_pieces = 0;
 	total_str_len = 0;
-	row = 0;
 	while (row < 4)
 	{
 		col = 0;
@@ -92,33 +78,30 @@ int			ft_val_ln(char **data, int row, int col)
 	}
 	if (num_of_pieces != 4 || total_str_len != 16)
 	{
-		ft_data_free(data);
-		return (-1);
+		write(1, "error\n", 6);
+		exit(1);
 	}
+	ft_validate_tetriminos(data);
 	return (1);
 }
 
-t_tetra		**read_tetraminos(const char *f_name, int row_num,
+t_tetra		**read_tetraminos(int fd, int row_num,
 					int tetr_num, int read_end)
 {
 	t_tetra	**ret;
-	char		**data;
-	int			fd;
+	char	**data;
 
-	ret = malloc(sizeof(t_tetra) * 27);
-	data = malloc(sizeof(char *) * 5);
-	fd = open(f_name, O_RDONLY); //move to another func. Add CHECK0RET0. Add check open file
+	CHECK0RET0(ret = (t_tetra **)malloc(sizeof(t_tetra) * 27));
+	CHECK0RET0(data = (char **)malloc(sizeof(char *) * 5));
 	while (read_end != 0)
 	{
 		read_end = get_next_line(fd, &data[row_num]);
 		row_num++;
 		if (row_num == 5)
 		{
-			if (((ft_val_ln(data, 0, 0)) == -1) || ((ft_val_tet(data)) == -1))
-				return (NULL);
-			else
-				ret[tetr_num] = tetra_new(data);
-			data = malloc(sizeof(char *) * 5);
+			ft_validate_lines(data, 0, 0);
+			ret[tetr_num] = tetra_new(data);
+			CHECK0RET0(data = malloc(sizeof(char *) * 5));
 			row_num = 0;
 			tetr_num++;
 		}
