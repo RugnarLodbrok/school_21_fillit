@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <fcntl.h>
 #include "libft/libft.h"
 #include "headers/tetra.h"
 #include "headers/fillit.h"
@@ -113,8 +114,7 @@ t_tetra		**read_tetraminos(const char *f_name, int row_num, int tetr_num)
 		{
 			if (((ft_val_ln(data, 0, 0)) == -1) || ((ft_val_tet(data)) == -1))
 				return (NULL);
-			else
-				ret[tetr_num] = tetra_new(data);
+			ret[tetr_num] = tetra_new(data);
 			data = malloc(sizeof(char *) * 5);
 			row_num = 0;
 			tetr_num++;
@@ -124,5 +124,6 @@ t_tetra		**read_tetraminos(const char *f_name, int row_num, int tetr_num)
 	}
 	if (row_num != 0)
 		return (NULL);
+	ret[tetr_num] = 0;
 	return (ret);
 }
