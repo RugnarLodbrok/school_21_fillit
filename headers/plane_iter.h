@@ -18,4 +18,6 @@ t_plane_iter	*plane_iter_new();
 t_point			plane_iter_next(t_plane_iter *it);
 t_point			*plane_iter_tab(size_t n);
 
+t_point			*plane_iter_tab_2(size_t w, size_t h);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: ksticks <ksticks@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 15:04:22 by ksticks           #+#    #+#             */
-/*   Updated: 2019/09/20 14:46:40 by edrowzee         ###   ########.fr       */
+/*   Updated: 2019/09/23 14:33:00 by edrowzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define BUFF_SIZE 42
 # define MALLCHECK(x) if (x == NULL) return (-1)
 # define MALLCKECK_INT(x) if (x == -1) return (-1)
+
+# define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+# define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 
 typedef struct		s_list
 {
