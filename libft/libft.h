@@ -24,6 +24,9 @@
 # define MALLCHECK(x) if (x == NULL) return (-1)
 # define MALLCKECK_INT(x) if (x == -1) return (-1)
 
+# define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+# define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
+
 typedef struct		s_list
 {
 	void			*content;

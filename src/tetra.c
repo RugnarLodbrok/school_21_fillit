@@ -2,6 +2,8 @@
 #include "tetra.h"
 #include "plane_iter.h"
 
+#include <stdio.h>
+
 static void loop(void **tab, size_t n)
 {
 	size_t i;
@@ -23,10 +25,11 @@ static void loop_str(char *str, size_t n)
 t_tetra *tetra_init(t_tetra *t, char **data)
 {
 	static char letter = 'A';
+	int i;
 
 	while (data[0][0] == T_EMPTY && data[0][1] == T_EMPTY
-		&& data[0][2] == T_EMPTY && data[0][3] == T_EMPTY)
-		loop((void **) data, 4);
+		   && data[0][2] == T_EMPTY && data[0][3] == T_EMPTY)
+		loop((void **)data, 4);
 	while (data[0][0] == T_EMPTY && data[1][0] == T_EMPTY
 		   && data[2][0] == T_EMPTY && data[3][0] == T_EMPTY)
 	{
@@ -39,7 +42,19 @@ t_tetra *tetra_init(t_tetra *t, char **data)
 	t->letter = letter++;
 	t->pos.x = 0;
 	t->pos.y = 0;
+	t->size.x = 0;
+	t->size.y = 0;
 	t->data_idx_iter = plane_iter_tab(16);
+	i = 0;
+	while (i < 16)
+	{
+		if (t->data[t->data_idx_iter[i].x][t->data_idx_iter[i].y] == T_FULL)
+		{
+			t->size.x = MAX(t->size.x, t->data_idx_iter[i].x + 1);
+			t->size.y = MAX(t->size.y, t->data_idx_iter[i].y + 1);
+		}
+		i++;
+	}
 	return (t);
 }
 
@@ -52,8 +67,8 @@ t_tetra *tetra_new(char **data)
 	return (t);
 }
 
-int	tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
-		t_point pos, int size)
+int tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
+			  t_point pos, int size)
 {
 	int i;
 	int k;
@@ -61,6 +76,8 @@ int	tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 
 	i = -1;
 	k = 0;
+	if (pos.x > size - t->size.x || pos.y > size - t->size.y)
+		return (0);
 	while (++i < 16)
 	{
 		if (t->data[t->data_idx_iter[i].x][t->data_idx_iter[i].y] != T_FULL)
@@ -97,11 +114,21 @@ void tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE], char c)
 		field[x + t->pos.x][y + t->pos.y] = c;
 		k++;
 		if (k >= 4)
-			break ;
+			break;
 	}
 }
 
 void tetra_draw_letter(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE])
 {
 	tetra_draw(t, field, t->letter);
+}
+
+void tetra_print(t_tetra *t)
+{
+	char **d;
+
+	d = t->data;
+	while (d - t->data < 4)
+		printf("%s\n", *d++);
+	printf("\n");
 }

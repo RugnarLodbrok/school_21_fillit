@@ -34,6 +34,7 @@ int	main(int argc, const char **argv)
 	t_tetra	**tetras;
 	int		size;
 	int		fd;
+	int i;
 
 	if (argc != 2)
 		write(1, "usage: fillit input file\n", 25);
@@ -44,6 +45,13 @@ int	main(int argc, const char **argv)
 		{
 			(write(1, "error\n", 6));
 			return (1);
+		}
+		i = 0;
+		while (i < ft_len((void **)tetras))
+		{
+//			tetra_print(tetras[i]);
+//			printf("size: %d %d\n\n", tetras[i]->size.x, tetras[i]->size.y);
+			i++;
 		}
 		size = solve(tetras);
 		draw_solution(size, tetras);
