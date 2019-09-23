@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <fcntl.h>
 #include "libft/libft.h"
 #include "fillit.h"
 #include "tetra.h"
