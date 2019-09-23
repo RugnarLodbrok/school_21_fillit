@@ -8,8 +8,8 @@ int main(int argc, const char **argv)
 {
 	t_tetra **tetras;
 	int size;
-
-	CHECK0RET1(tetras = read_tetraminos(argv[1], 0, 0));
+//add here argc check
+	CHECK0RET1(tetras = read_tetraminos(argv[1], 0, 0, 1));
 	size = solve(tetras);
 	draw_solution(size, tetras);
 	return (0);

@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include "headers/tetra.h"
-#include "headers/fillit.h"
+#include "../headers/fillit.h"
 
 void		ft_data_free(char **data)
 {
@@ -98,18 +98,21 @@ int			ft_val_ln(char **data, int row, int col)
 	return (1);
 }
 
-t_tetra		**read_tetraminos(const char *f_name, int row_num, int tetr_num)
+t_tetra		**read_tetraminos(const char *f_name, int row_num,
+					int tetr_num, int read_end)
 {
-	t_tetra		**ret;
+	t_tetra	**ret;
 	char		**data;
 	int			fd;
 
-	fd = open(f_name, O_RDONLY);
 	ret = malloc(sizeof(t_tetra) * 27);
 	data = malloc(sizeof(char *) * 5);
-	while (get_next_line(fd, data + row_num) != 0)
+	fd = open(f_name, O_RDONLY); //move to another func. Add CHECK0RET0. Add check open file
+	while (read_end != 0)
 	{
-		if (row_num == 4)
+		read_end = get_next_line(fd, &data[row_num]);
+		row_num++;
+		if (row_num == 5)
 		{
 			if (((ft_val_ln(data, 0, 0)) == -1) || ((ft_val_tet(data)) == -1))
 				return (NULL);
@@ -119,10 +122,9 @@ t_tetra		**read_tetraminos(const char *f_name, int row_num, int tetr_num)
 			row_num = 0;
 			tetr_num++;
 		}
-		else
-			row_num++;
+		if ((row_num != 5 && row_num != 0) && read_end == 0)
+			return (NULL);
 	}
-	if (row_num != 0)
-		return (NULL);
+	ret[tetr_num] = 0;
 	return (ret);
 }
