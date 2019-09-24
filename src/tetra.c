@@ -76,8 +76,8 @@ int tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 
 	i = -1;
 	k = 0;
-	if (pos.x > size - t->size.x || pos.y > size - t->size.y)
-		return (0);
+//	if (pos.x > size - t->size.x || pos.y > size - t->size.y)
+//		return (0);
 	while (++i < 16)
 	{
 		if (t->data[t->data_idx_iter[i].x][t->data_idx_iter[i].y] != T_FULL)
@@ -85,8 +85,6 @@ int tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 		k++;
 		p.x = t->data_idx_iter[i].x + pos.x;
 		p.y = t->data_idx_iter[i].y + pos.y;
-		if (p.x < 0 || p.x > size - 1 || p.y < 0 || p.y > size - 1)
-			return (0);
 		if (field[p.x][p.y] != T_EMPTY)
 			return (0);
 		if (k >= 4)
