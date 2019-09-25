@@ -34,8 +34,8 @@ int solve_recur(char field[FIELD_SIZE][FIELD_SIZE],
 			if (solve_recur(field, tetras + 1, size))
 				return (1);
 			tetra_draw(*tetras, field, T_EMPTY);
-			if (k++ > 2)	// don't ask why
-				return (0);
+//			if (k++ > 2)	// don't ask why
+//				return (0);
 		}
 	}
 	return (0);

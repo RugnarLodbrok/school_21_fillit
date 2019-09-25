@@ -15,7 +15,6 @@
 #include "libft/libft.h"
 #include "fillit.h"
 #include "tetra.h"
-#include "plane_iter.h"
 
 int	ft_open_file(const char *f_name)
 {
