@@ -19,9 +19,7 @@
 # define CHECK0RET(x, r) if (!(x)) return (r);
 # define CHECK0RET0(x) CHECK0RET(x, 0);
 # define CHECK0RET1(x) CHECK0RET(x, -1);
-# define BUFF_SIZE 42
-# define MALLCHECK(x) if (x == NULL) return (-1)
-# define MALLCKECK_INT(x) if (x == -1) return (-1)
+# define CHECK1RET1(x) if ((x) < 0) return (-1)
 
 # define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 # define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
@@ -109,9 +107,11 @@ void				ft_lstaddend(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
+void				*ft_realloc(void *ptr, size_t n, size_t len);
+
 void				*t_buff_init(t_buff *b, size_t size);
-int					t_buff_extend(t_buff *b);
-int					t_buff_add_len(t_buff *b, size_t len);
+size_t				t_buff_extend(t_buff *b);
+int					t_buff_append(t_buff *b, void *data, size_t len);
 
 int					ft_sqrt_int(int nb);
 int					ft_sqrt_ceil(int nb);
