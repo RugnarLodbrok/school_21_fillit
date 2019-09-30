@@ -6,14 +6,14 @@
 /*   By: edrowzee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:12:08 by edrowzee          #+#    #+#             */
-/*   Updated: 2019/09/23 15:12:37 by edrowzee         ###   ########.fr       */
+/*   Updated: 2019/09/25 16:04:45 by edrowzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "plane_iter.h"
 
-t_plane_iter *plane_iter_init(t_plane_iter *it)
+t_plane_iter	*plane_iter_init(t_plane_iter *it)
 {
 	it->r = 0;
 	it->i = 0;
@@ -24,16 +24,16 @@ t_plane_iter *plane_iter_init(t_plane_iter *it)
 	return (it);
 }
 
-t_plane_iter *plane_iter_new()
+t_plane_iter	*plane_iter_new(void)
 {
 	t_plane_iter *it;
 
-	CHECK0RET0(it = malloc(sizeof(t_plane_iter)))
+	CHECK0RET0(it = malloc(sizeof(t_plane_iter)));
 	plane_iter_init(it);
 	return (it);
 }
 
-t_point plane_iter_next(t_plane_iter *self)
+t_point			plane_iter_next(t_plane_iter *self)
 {
 	t_point ret;
 
@@ -59,11 +59,11 @@ t_point plane_iter_next(t_plane_iter *self)
 	return (ret);
 }
 
-t_point *plane_iter_tab(size_t n)
+t_point			*plane_iter_tab(size_t n)
 {
-	size_t i;
-	t_point *ret;
-	t_plane_iter it;
+	size_t			i;
+	t_point			*ret;
+	t_plane_iter	it;
 
 	CHECK0RET0(ret = malloc(sizeof(t_point) * n));
 	i = 0;
@@ -73,12 +73,12 @@ t_point *plane_iter_tab(size_t n)
 	return (ret);
 }
 
-t_point *plane_iter_tab_2(size_t w, size_t h)
+t_point			*plane_iter_tab_2(size_t w, size_t h)
 {
-	size_t i;
-	size_t j;
-	size_t k;
-	t_point *ret;
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	t_point	*ret;
 
 	CHECK0RET0(ret = malloc(sizeof(t_point) * (w * h)));
 	k = 0;

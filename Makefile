@@ -18,6 +18,7 @@ SRC = src/main.c \
 	src/draw.c \
 	src/plane_iter.c \
 	src/solver.c \
+	src/tetra_prepare.c \
 	src/reader.c
 OPTION = -I. -Iheaders
 OBJ = $(SRC:.c=.o)

@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <fcntl.h>
 #include "libft/libft.h"
 #include "fillit.h"
 #include "tetra.h"
 
-int	ft_open_file(const char *f_name)
+int		ft_open_file(const char *f_name)
 {
 	int fd;
 
@@ -29,32 +28,43 @@ int	ft_open_file(const char *f_name)
 	return (fd);
 }
 
-int	main(int argc, const char **argv)
+void	clean_up(t_tetra **tetras)
+{
+	int i;
+
+	i = 0;
+	while (tetras[i])
+	{
+		free(tetras[i]->data[0]);
+		free(tetras[i]->data[1]);
+		free(tetras[i]->data[2]);
+		free(tetras[i]->data[3]);
+		free(tetras[i]->data);
+		free(tetras[i]);
+		i++;
+	}
+	free(tetras);
+}
+
+int		main(int argc, const char **argv)
 {
 	t_tetra	**tetras;
 	int		size;
 	int		fd;
-	int i;
 
 	if (argc != 2)
 		write(1, "usage: fillit input file\n", 25);
 	else
 	{
 		fd = ft_open_file(argv[1]);
-		if ((tetras = read_tetraminos(fd, 0, 0, 1)) == NULL)
+		if ((tetras = read_tetraminos(fd)) == NULL)
 		{
 			(write(1, "error\n", 6));
 			return (1);
 		}
-		i = 0;
-		while (i < ft_len((void **)tetras))
-		{
-//			tetra_print(tetras[i]);
-//			printf("size: %d %d\n\n", tetras[i]->size.x, tetras[i]->size.y);
-			i++;
-		}
 		size = solve(tetras);
 		draw_solution(size, tetras);
+		clean_up(tetras);
 	}
 	return (0);
 }

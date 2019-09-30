@@ -1,50 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tetra.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edrowzee <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/25 16:09:25 by edrowzee          #+#    #+#             */
+/*   Updated: 2019/09/25 16:09:58 by edrowzee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "tetra.h"
 #include "plane_iter.h"
 
-#include <stdio.h>
-
-static void loop(void **tab, size_t n)
+void			tetra_init_size(t_tetra *t)
 {
-	size_t i;
+	int			i;
 
-	i = 0;
-	while (i++ < n - 1)
-		ft_swap(tab + i - 1, tab + i);
-}
-
-static void loop_str(char *str, size_t n)
-{
-	size_t i;
-
-	i = 0;
-	while (i++ < n - 1)
-		ft_swap_char(str + i - 1, str + i);
-}
-
-t_tetra *tetra_init(t_tetra *t, char **data)
-{
-	static char letter = 'A';
-	int i;
-
-	while (data[0][0] == T_EMPTY && data[0][1] == T_EMPTY
-		   && data[0][2] == T_EMPTY && data[0][3] == T_EMPTY)
-		loop((void **)data, 4);
-	while (data[0][0] == T_EMPTY && data[1][0] == T_EMPTY
-		   && data[2][0] == T_EMPTY && data[3][0] == T_EMPTY)
-	{
-		loop_str(data[0], 4);
-		loop_str(data[1], 4);
-		loop_str(data[2], 4);
-		loop_str(data[3], 4);
-	}
-	t->data = data;
-	t->letter = letter++;
-	t->pos.x = 0;
-	t->pos.y = 0;
-	t->size.x = 0;
-	t->size.y = 0;
-	t->data_idx_iter = plane_iter_tab(16);
 	i = 0;
 	while (i < 16)
 	{
@@ -55,29 +28,42 @@ t_tetra *tetra_init(t_tetra *t, char **data)
 		}
 		i++;
 	}
+}
+
+t_tetra			*tetra_init(t_tetra *t, char **data)
+{
+	static char	letter = 'A';
+
+	tetra_move_to_corner(data);
+	t->data = data;
+	t->letter = letter++;
+	t->pos.x = 0;
+	t->pos.y = 0;
+	t->size.x = 0;
+	t->size.y = 0;
+	t->data_idx_iter = plane_iter_tab(16);
+	tetra_init_size(t);
 	return (t);
 }
 
-t_tetra *tetra_new(char **data)
+t_tetra			*tetra_new(char **data)
 {
 	t_tetra *t;
 
-	CHECK0RET0(t = malloc(sizeof(t_tetra)))
+	CHECK0RET0(t = malloc(sizeof(t_tetra)));
 	tetra_init(t, data);
 	return (t);
 }
 
-int tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
-			  t_point pos, int size)
+int				tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
+				t_point pos)
 {
-	int i;
-	int k;
-	t_point p;
+	int		i;
+	int		k;
+	t_point	p;
 
 	i = -1;
 	k = 0;
-//	if (pos.x > size - t->size.x || pos.y > size - t->size.y)
-//		return (0);
 	while (++i < 16)
 	{
 		if (t->data[t->data_idx_iter[i].x][t->data_idx_iter[i].y] != T_FULL)
@@ -88,13 +74,14 @@ int tetra_put(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE],
 		if (field[p.x][p.y] != T_EMPTY)
 			return (0);
 		if (k >= 4)
-			break;
+			break ;
 	}
 	t->pos = pos;
 	return (1);
 }
 
-void tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE], char c)
+void			tetra_draw(t_tetra *t,
+				char field[FIELD_SIZE][FIELD_SIZE], char c)
 {
 	int i;
 	int k;
@@ -112,21 +99,6 @@ void tetra_draw(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE], char c)
 		field[x + t->pos.x][y + t->pos.y] = c;
 		k++;
 		if (k >= 4)
-			break;
+			break ;
 	}
-}
-
-void tetra_draw_letter(t_tetra *t, char field[FIELD_SIZE][FIELD_SIZE])
-{
-	tetra_draw(t, field, t->letter);
-}
-
-void tetra_print(t_tetra *t)
-{
-	char **d;
-
-	d = t->data;
-	while (d - t->data < 4)
-		printf("%s\n", *d++);
-	printf("\n");
 }

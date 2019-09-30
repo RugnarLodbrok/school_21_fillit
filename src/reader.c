@@ -13,7 +13,12 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 #include "tetra.h"
-#include "fillit.h"
+
+void		error_exit()
+{
+	ft_putendl("error");
+	exit(1);
+}
 
 int			ft_connects_counter(char **data, int row, int col)
 {
@@ -77,15 +82,12 @@ int			ft_validate_lines(char **data, int row, int col)
 		row++;
 	}
 	if (num_of_pieces != 4 || total_str_len != 16)
-	{
-		write(1, "error\n", 6);
-		exit(1);
-	}
+		error_exit();
 	ft_validate_tetriminos(data);
 	return (1);
 }
 
-t_tetra		**read_tetraminos(int fd, int row_num,
+t_tetra		**read_tetraminos2(int fd, int row_num,
 					int tetr_num, int read_end)
 {
 	t_tetra	**ret;
@@ -97,7 +99,8 @@ t_tetra		**read_tetraminos(int fd, int row_num,
 	{
 		read_end = get_next_line(fd, &data[row_num]);
 		row_num++;
-		if (row_num == 5)
+//		printf("read_end %d, row_num %d, data: %s\n", read_end, row_num, data[row_num - 1]);
+		if (row_num == 5 && read_end != 0)
 		{
 			ft_validate_lines(data, 0, 0);
 			ret[tetr_num] = tetra_new(data);
@@ -107,7 +110,52 @@ t_tetra		**read_tetraminos(int fd, int row_num,
 		}
 		if ((row_num != 5 && row_num != 0) && read_end == 0)
 			return (NULL);
+		if (row_num == 5 && read_end == 0)
+			return (NULL);
 	}
 	ret[tetr_num] = 0;
 	return (ret);
+}
+
+t_tetra		*next_tetra(int fd)
+{
+	int i;
+	int status;
+	char **data;
+
+	i = 0;
+	data = malloc(sizeof(char*) * 5);
+	while (i < 5)
+	{
+		status = get_next_line(fd, data + i);
+		if (i == 4 && !status) //tmp; remove after update of gnl
+			break;//tmp
+		if (status < 0)
+			error_exit();
+		if (!status && i == 0)
+			return (0);
+		if (!status)
+			error_exit();
+		i++;
+	}
+	if (status) //tmp; remove after update of gnl
+		if (ft_strcmp("", data[4]))
+			error_exit();
+	data[4] = 0;
+	ft_validate_lines(data, 0, 0);
+	return (tetra_new(data));
+}
+
+t_tetra		**read_tetraminos(int fd)
+{
+	t_tetra	**tetras;
+	t_tetra *t;
+	int i;
+
+	CHECK0RET0(tetras = (t_tetra **)malloc(sizeof(t_tetra) * 27));
+	i = 0;
+	while ((t = next_tetra(fd)))
+		tetras[i++] = t;
+	tetras[i] = 0;
+	return (tetras);
 }
