@@ -1,5 +1,20 @@
-#ifdef _WIN32
-#include <io.h>
-#else
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unistd_fix.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksticks <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/25 16:25:07 by ksticks           #+#    #+#             */
+/*   Updated: 2019/09/25 16:25:09 by ksticks          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef UNISTD_FIX_H
+# define UNISTD_FIX_H
+# ifdef _WIN32
+#  include <io.h>
+# else
+#  include <unistd.h>
+# endif
 #endif

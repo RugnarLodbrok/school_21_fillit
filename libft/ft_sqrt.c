@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_sqrt_int(int nb)
+int	ft_sqrt_int(int nb)
 {
 	int r;
 	int div;
@@ -24,18 +24,18 @@ int ft_sqrt_int(int nb)
 		div = nb / r;
 		avg = (r + div) / 2;
 		if (avg == r || div == avg)
-			break;
+			break ;
 		r = avg;
 	}
 	return (avg);
 }
 
-int ceil_div(int a, int b)
+int	ceil_div(int a, int b)
 {
 	return (a + b - 1) / b;
 }
 
-int ft_sqrt_ceil(int nb)
+int	ft_sqrt_ceil(int nb)
 {
 	int r;
 	int div;
@@ -50,7 +50,7 @@ int ft_sqrt_ceil(int nb)
 		div = ceil_div(nb, r);
 		avg = ceil_div(r + div, 2);
 		if (avg == r || div == avg)
-			break;
+			break ;
 		r = avg;
 	}
 	return (avg);
