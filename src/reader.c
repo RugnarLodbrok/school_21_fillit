@@ -99,7 +99,6 @@ t_tetra		**read_tetraminos2(int fd, int row_num,
 	{
 		read_end = get_next_line(fd, &data[row_num]);
 		row_num++;
-//		printf("read_end %d, row_num %d, data: %s\n", read_end, row_num, data[row_num - 1]);
 		if (row_num == 5 && read_end != 0)
 		{
 			ft_validate_lines(data, 0, 0);
@@ -128,8 +127,6 @@ t_tetra		*next_tetra(int fd)
 	while (i < 5)
 	{
 		status = get_next_line(fd, data + i);
-		if (i == 4 && !status) //tmp; remove after update of gnl
-			break;//tmp
 		if (status < 0)
 			error_exit();
 		if (!status && i == 0)
@@ -138,9 +135,8 @@ t_tetra		*next_tetra(int fd)
 			error_exit();
 		i++;
 	}
-	if (status) //tmp; remove after update of gnl
-		if (ft_strcmp("", data[4]))
-			error_exit();
+	if (ft_strcmp("", data[4]))
+		error_exit();
 	data[4] = 0;
 	ft_validate_lines(data, 0, 0);
 	return (tetra_new(data));
