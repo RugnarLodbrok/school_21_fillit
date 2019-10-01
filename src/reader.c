@@ -65,7 +65,7 @@ static int		ft_validate_lines(char **data, int i, int j)
 	while (i < 4)
 	{
 		j = 0;
-		while (data[i][j] != '\0')
+		while (data[i][j])
 		{
 			if (j > 3)
 				error_exit();
