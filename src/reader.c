@@ -15,7 +15,7 @@
 #include "tetra.h"
 #include "fillit.h"
 
-int			ft_connects_counter(char **data, int row, int col)
+static int		ft_connects_counter(char **data, int row, int col)
 {
 	int result;
 
@@ -43,7 +43,7 @@ int			ft_connects_counter(char **data, int row, int col)
 	return (result);
 }
 
-int			ft_validate_tetriminos(char **data)
+static int		ft_validate_tetriminos(char **data)
 {
 	int		connects;
 
@@ -57,7 +57,7 @@ int			ft_validate_tetriminos(char **data)
 	}
 }
 
-int			ft_validate_lines(char **data, int i, int j)
+static int		ft_validate_lines(char **data, int i, int j)
 {
 	int	num_of_pieces;
 	int	total_str_len;
@@ -84,7 +84,7 @@ int			ft_validate_lines(char **data, int i, int j)
 	return (1);
 }
 
-t_tetra		*next_tetra(int fd)
+static t_tetra	*next_tetra(int fd)
 {
 	int i;
 	int status;
@@ -110,7 +110,7 @@ t_tetra		*next_tetra(int fd)
 	return (tetra_new(data));
 }
 
-t_tetra		**read_tetraminos(int fd)
+t_tetra			**read_tetraminos(int fd)
 {
 	t_tetra	**tetras;
 	t_tetra *t;
