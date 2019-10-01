@@ -87,9 +87,9 @@ static int		ft_validate_lines(char **data, int i, int j)
 
 static t_tetra	*next_tetra(int fd)
 {
-	int i;
-	int status;
-	char **data;
+	int		i;
+	int		status;
+	char	**data;
 
 	i = 0;
 	data = malloc(sizeof(char*) * 5);
@@ -114,8 +114,8 @@ static t_tetra	*next_tetra(int fd)
 t_tetra			**read_tetraminos(int fd)
 {
 	t_tetra	**tetras;
-	t_tetra *t;
-	int i;
+	t_tetra	*t;
+	int		i;
 
 	CHECK0RET0(tetras = (t_tetra **)malloc(sizeof(t_tetra) * 27));
 	i = 0;
