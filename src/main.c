@@ -15,6 +15,12 @@
 #include "fillit.h"
 #include "tetra.h"
 
+void		error_exit(void)
+{
+	ft_putendl("error");
+	exit(1);
+}
+
 int		ft_open_file(const char *f_name)
 {
 	int fd;
