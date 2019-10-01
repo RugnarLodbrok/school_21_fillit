@@ -60,25 +60,26 @@ static int		ft_validate_tetriminos(char **data)
 static int		ft_validate_lines(char **data, int i, int j)
 {
 	int	num_of_pieces;
-	int	total_str_len;
 
 	num_of_pieces = 0;
-	total_str_len = 0;
 	while (i < 4)
 	{
 		j = 0;
 		while (data[i][j] != '\0')
 		{
+			if (j > 3)
+				error_exit();
 			if (data[i][j] == T_FULL)
 				num_of_pieces++;
 			else if (data[i][j] != T_EMPTY)
 				error_exit();
-			total_str_len++;
 			j++;
 		}
+		if (j < 4)
+			error_exit();
 		i++;
 	}
-	if (num_of_pieces != 4 || total_str_len != 16)
+	if (num_of_pieces != 4)
 		error_exit();
 	ft_validate_tetriminos(data);
 	return (1);
